@@ -1,10 +1,10 @@
 import { createApp } from "vue";
-import "./style.css";
+import "../src/style.css";
 import App from "./App.vue";
 import router from "../router.js";
 import PrimeVue from "primevue/config";
 import Wind from "../src/wind";
-import "primevue/resources/themes/md-dark-deeppurple/theme.css";
+import "primevue/resources/themes/md-light-deeppurple/theme.css";
 
 const app = createApp(App);
 
