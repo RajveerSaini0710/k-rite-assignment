@@ -1,5 +1,5 @@
 <template>
-    <section class="w-1/4 border rounded-lg m-4 p-2 ">
+    <section class="w-[22%] border rounded-lg my-4 mx-2 p-2 ">
 
         <!-- section 1  -->
         <div class="flex items-center mb-4 ">
