@@ -6,7 +6,7 @@
             <FloatLabel class="mr-4">
                 <IconField iconPosition="left">
                     <InputIcon class="pi pi-search"> </InputIcon>
-                    <InputText v-model="filters['global'].value" id="search" />
+                    <InputText v-model="filters['global'].value" id="search" @input="updateGlobalFilter" />
                 </IconField>
                 <label for="search" class="text-gray-400 indent-6 ">Search for...</label>
             </FloatLabel>
@@ -16,7 +16,6 @@
 
         <!-- section 2 -->
         <div class="flex items-center border-b">
-
             <Menubar :model="items1" class="flex-1" />
             <div class=" flex items-center p-2 border rounded-lg mr-2 hover:cursor-pointer">
                 <i class="pi pi-plus-circle mr-2"></i>
@@ -29,7 +28,7 @@
         </div>
 
         <!-- section 3 -->
-        <DataTable v-model:filters="filters" :globalFilterFields="['brandName', 'tags', 'categories']"
+        <DataTable v-model:filters="filters" :globalFilterFields="['brands.name', 'tags', 'categories']"
             v-model:selection="selectedBrands" :value="products" showGridlines tableStyle="min-width: 10rem">
             <template #empty> No Brands found. </template>
             <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
@@ -41,7 +40,7 @@
                     </div>
                 </template>
             </Column>
-            <Column field="description" header="Description" class="w-60"></Column>
+            <Column field="description" header="Description"></Column>
             <Column header="Members">
                 <template #body="{ data }">
                     <AvatarGroup v-if="data" class="ml-4">
@@ -51,9 +50,18 @@
                     </AvatarGroup>
                 </template>
             </Column>
-            <Column field="categories" sortable header="Categories"></Column>
+            <Column field="categories" sortable header="Categories">
+                <template #body="{ data }">
+                    <Tag v-for="category in data.categories" :value="category.name" :severity="category.severity"
+                        class="mr-1"></Tag>
+                </template>
+            </Column>
             <Column field="tags" sortable header="Tags"></Column>
-            <Column field="nextMeeting" header="Next Meeting"></Column>
+            <Column field="nextMeeting" header="Next Meeting">
+                <template #body="{ data }">
+                    <Tag :value="data.nextMeeting.name" :severity="data.nextMeeting.severity" class="mr-1"></Tag>
+                </template>
+            </Column>
         </DataTable>
     </section>
 </template>
@@ -69,7 +77,7 @@ import Column from 'primevue/column';
 import { FilterMatchMode, FilterOperator } from 'primevue/api';
 import Avatar from 'primevue/avatar';
 import AvatarGroup from 'primevue/avatargroup';
-
+import Tag from 'primevue/tag';
 export default {
     components: {
         InputText,
@@ -80,7 +88,9 @@ export default {
         DataTable,
         Column,
         AvatarGroup,
-        Avatar
+        Avatar,
+        Tag
+
     },
     created() {
         this.initFilters();
@@ -94,18 +104,23 @@ export default {
                 categories: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
             };
         },
+        updateGlobalFilter() {
+            this.$nextTick(() => {
+                this.$refs.dt.filter(this.filters['global'].value, 'brands.name', 'contains');
+            });
+        },
     },
     data() {
         return {
             filters: null,
             products: [
-                { brands: { name: 'Wix', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Fwix.png?alt=media&token=2e4bb582-eefa-43f3-9b9b-f4bc2de88b94" }, description: 'Description 1', members: [{ img: "onyamalimba.png" }, { img: "amyelsner.png" }, { img: "asiyajavayant.png" }, { img: "asiyajavayant.png" }, { img: "onyamalimba.png" },], categories: 'Category 1', tags: 'Tag 1', nextMeeting: '2024-03-16' },
-                { brands: { name: 'Facebook', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Ffacebook.png?alt=media&token=f5df52ee-5b31-4cfd-8d66-3f27bf2a6ee0" }, description: 'Description 2', members: [{ img: "amyelsner.png" }, { img: "asiyajavayant.png" }, { img: "onyamalimba.png" }, { img: 'xuxuefeng.png' }, { img: "onyamalimba.png" }], categories: 'Category 2', tags: 'Tag 2', nextMeeting: '2024-03-17' },
-                { brands: { name: 'Apple', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Fapple-logo.png?alt=media&token=f91a1bb2-bd70-46b4-b33e-676f276cf233" }, description: 'Description 3', members: [{ img: "asiyajavayant.png" }, { img: "onyamalimba.png" }, { img: "asiyajavayant.png" }, { img: "onyamalimba.png" },], categories: 'Category 3', tags: 'Tag 3', nextMeeting: '2024-03-18' },
-                { brands: { name: 'Microsoft', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Fmicrosoft.png?alt=media&token=6ce628ea-b57b-4379-a4d5-429f3663ff07" }, description: 'Description 4', members: [{ img: "amyelsner.png" }, { img: "asiyajavayant.png" }, { img: "amyelsner.png" }, { img: 'xuxuefeng.png' }, { img: "onyamalimba.png" }, { img: 'xuxuefeng.png' }, { img: "onyamalimba.png" }], categories: 'Category 4', tags: 'Tag 4', nextMeeting: '2024-03-19' },
-                { brands: { name: 'Shopify', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Fshopify.png?alt=media&token=6205bffb-30c9-4e5b-a61a-a8ae748b8157" }, description: 'Description 5', members: [{ img: "amyelsner.png" }, { img: "asiyajavayant.png" }, { img: "onyamalimba.png" }, { img: 'xuxuefeng.png' }, { img: "onyamalimba.png" }], categories: 'Category 5', tags: 'Tag 5', nextMeeting: '2024-03-17' },
-                { brands: { name: 'Google', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Fgoogle.png?alt=media&token=69b77d72-4167-4599-8bc1-c808bd807e66" }, description: 'Description 6', members: [{ img: "amyelsner.png" }, { img: "asiyajavayant.png" }, { img: "onyamalimba.png" }, { img: 'xuxuefeng.png' }, { img: "onyamalimba.png" }], categories: 'Category 6', tags: 'Tag 6', nextMeeting: '2024-03-17' },
-                { brands: { name: 'Paypal', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Fpaypal.png?alt=media&token=bc044345-d31f-4ff6-b617-3e92da96ea03" }, description: 'Description 7', members: [{ img: "amyelsner.png" }, { img: "asiyajavayant.png" }, { img: "onyamalimba.png" }, { img: 'xuxuefeng.png' }, { img: "onyamalimba.png" }], categories: 'Category 7', tags: 'Tag 7', nextMeeting: '2024-03-17' },
+                { brands: { name: 'Wix', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Fwix.png?alt=media&token=2e4bb582-eefa-43f3-9b9b-f4bc2de88b94" }, description: 'Description 1', members: [{ img: "onyamalimba.png" }, { img: "amyelsner.png" }, { img: "asiyajavayant.png" }, { img: "asiyajavayant.png" }, { img: "onyamalimba.png" },], categories: [{ name: 'Automation', severity: "warning" }], tags: 'Tag 1', nextMeeting: { name: 'In 30 Minutes', severity: "success" } },
+                { brands: { name: 'Facebook', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Ffacebook.png?alt=media&token=f5df52ee-5b31-4cfd-8d66-3f27bf2a6ee0" }, description: 'Description 2', members: [{ img: "amyelsner.png" }, { img: "asiyajavayant.png" }, { img: "onyamalimba.png" }, { img: 'xuxuefeng.png' }, { img: "onyamalimba.png" }], categories: [{ name: 'B2B', severity: "info" }, { name: "Ecommerce", severity: "success" }], tags: 'Tag 2', nextMeeting: { name: 'Tomorrow', severity: "info" } },
+                { brands: { name: 'Apple', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Fapple-logo.png?alt=media&token=f91a1bb2-bd70-46b4-b33e-676f276cf233" }, description: 'Description 3', members: [{ img: "asiyajavayant.png" }, { img: "onyamalimba.png" }, { img: "asiyajavayant.png" }, { img: "onyamalimba.png" },], categories: [{ name: 'SAAS', severity: "success" }, { name: "Mobile", severity: "danger" }], tags: 'Tag 3', nextMeeting: { name: 'Tomorrow', severity: "info" } },
+                { brands: { name: 'Microsoft', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Fmicrosoft.png?alt=media&token=6ce628ea-b57b-4379-a4d5-429f3663ff07" }, description: 'Description 4', members: [{ img: "amyelsner.png" }, { img: "asiyajavayant.png" }, { img: "amyelsner.png" }, { img: 'xuxuefeng.png' }, { img: "onyamalimba.png" }, { img: 'xuxuefeng.png' }, { img: "onyamalimba.png" }], categories: [{ name: 'Marketplace', severity: "success" }, { name: "Automation", severity: "warning" }], tags: 'Tag 4', nextMeeting: { name: 'In 6 hours', severity: "success" } },
+                { brands: { name: 'Shopify', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Fshopify.png?alt=media&token=6205bffb-30c9-4e5b-a61a-a8ae748b8157" }, description: 'Description 5', members: [{ img: "amyelsner.png" }, { img: "asiyajavayant.png" }, { img: "onyamalimba.png" }, { img: 'xuxuefeng.png' }, { img: "onyamalimba.png" }], categories: [{ name: 'B2B', severity: "info" }, { name: "B2C", severity: "danger" }], tags: 'Tag 5', nextMeeting: { name: 'No contact', severity: "danger" } },
+                { brands: { name: 'Google', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Fgoogle.png?alt=media&token=69b77d72-4167-4599-8bc1-c808bd807e66" }, description: 'Description 6', members: [{ img: "amyelsner.png" }, { img: "asiyajavayant.png" }, { img: "onyamalimba.png" }, { img: 'xuxuefeng.png' }, { img: "onyamalimba.png" }], categories: [{ name: 'Finance', severity: "success" }, { name: "Automation", severity: "warning" }], tags: 'Tag 6', nextMeeting: { name: 'In 1 hours', severity: "success" } },
+                { brands: { name: 'Paypal', img: "https://firebasestorage.googleapis.com/v0/b/saini-lifters.appspot.com/o/folder%2Fpaypal.png?alt=media&token=bc044345-d31f-4ff6-b617-3e92da96ea03" }, description: 'Description 7', members: [{ img: "amyelsner.png" }, { img: "asiyajavayant.png" }, { img: "onyamalimba.png" }, { img: 'xuxuefeng.png' }, { img: "onyamalimba.png" }], categories: [{ name: 'B2B', severity: "info" }, { name: "SAAS", severity: "success" }], tags: 'Tag 7', nextMeeting: { name: 'Next Month', severity: "warning" } },
             ],
             items1: [
                 {
