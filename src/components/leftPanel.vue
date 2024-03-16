@@ -18,21 +18,24 @@
         <div class="border p-2 rounded-t-lg hover:cursor-pointer">
             <div class=" flex items-center mb-2 p-2 hover:bg-gray-100 rounded-lg">
                 <img src="../assets/images/pen-tool.png" alt="" class="w-4 mr-2">
-                <p class="font-medium text-gray-700 text-lg flex-1">Design Team</p>
+                <router-link to="/design" class="font-medium text-gray-700 text-lg flex-1">Design
+                    Team</router-link>
                 <div>
                     <p class=" border px-2 py-1 rounded text-sm text-end"> ⌘ + 1 </p>
                 </div>
             </div>
             <div class=" flex items-center mb-2 border border-gray-200 hover:bg-gray-100 rounded-lg p-2">
                 <img src="../assets/images/speaker.png" alt="" class="w-4 mr-2">
-                <p class="font-medium text-gray-700 text-lg flex-1">Marketing Team</p>
+                <router-link class="font-medium text-gray-700 text-lg flex-1" to="/marketing"> Marketing Team
+                </router-link>
                 <div>
                     <p class=" border px-2 py-1 rounded text-sm text-end"> ⌘ + 2 </p>
                 </div>
             </div>
             <div class=" flex items-center  p-2 hover:bg-gray-100 rounded-lg">
                 <img src="../assets/images/html.png" alt="" class="w-4 mr-2">
-                <p class="font-medium text-gray-700 text-lg flex-1">Development Team</p>
+                <router-link to="/development" class="font-medium text-gray-700 text-lg flex-1">Development
+                    Team</router-link>
                 <div>
                     <p class=" border px-2 py-1 rounded text-sm text-end"> ⌘ + 3 </p>
                 </div>
@@ -68,16 +71,19 @@
 
         <div class=" flex items-center mb-2 p-2 hover:bg-gray-100 ">
             <img src="../assets/images/add-friend.png" alt="" class="w-4 mr-2">
-            <p class="font-bold text-gray-700 text-lg flex-1"> Invite Teammates </p>
+            <router-link to="/invitation" class="font-bold text-gray-700 text-lg flex-1"> Invite Teammates
+            </router-link>
         </div>
         <div class=" flex items-center mb-2 p-2 hover:cursor-pointer hover:bg-gray-100">
             <img src="../assets/images/question.png" alt="" class="w-4 mr-2">
-            <p class="font-bold text-gray-700 text-lg flex-1"> Help and first steps</p>
+            <router-link to="help" class="font-bold text-gray-700 text-lg flex-1"> Help and first steps</router-link>
         </div>
         <div class=" flex items-center mb-2 p-2 bg-gray-100 rounded-lg hover:cursor-pointer hover:bg-gray-100">
             <img src="../assets/images/number-7.png" alt="" class="w-5 mr-2">
             <p class="font-bold text-gray-700 text-lg flex-1"> days left on trial</p>
-            <p class="bg-black text-white font-bold p-2 rounded-lg">Add billing</p>
+            <router-link to="/billing"
+                class="bg-black text-white font-bold p-2 rounded-lg hover:bg-white hover:text-black hover:border-black hover:border">Add
+                billing</router-link>
         </div>
 
     </section>
