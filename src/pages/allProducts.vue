@@ -1,5 +1,5 @@
 <template>
-    <section class="w-full flex">
+    <section class="w-full h-full flex ">
         <leftPanel />
         <rightPanel />
     </section>
