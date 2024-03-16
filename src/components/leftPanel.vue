@@ -16,21 +16,21 @@
 
         <!-- section 2  -->
         <div class="border p-2 rounded-t-lg hover:cursor-pointer">
-            <div class=" flex items-center mb-2 p-2">
+            <div class=" flex items-center mb-2 p-2 hover:bg-gray-100 rounded-lg">
                 <img src="../assets/images/pen-tool.png" alt="" class="w-4 mr-2">
                 <p class="font-medium text-gray-700 text-lg flex-1">Design Team</p>
                 <div>
                     <p class=" border px-2 py-1 rounded text-sm text-end"> ⌘ + 1 </p>
                 </div>
             </div>
-            <div class=" flex items-center mb-2 bg-gray-100 rounded-lg p-2">
+            <div class=" flex items-center mb-2 border border-gray-200 hover:bg-gray-100 rounded-lg p-2">
                 <img src="../assets/images/speaker.png" alt="" class="w-4 mr-2">
                 <p class="font-medium text-gray-700 text-lg flex-1">Marketing Team</p>
                 <div>
                     <p class=" border px-2 py-1 rounded text-sm text-end"> ⌘ + 2 </p>
                 </div>
             </div>
-            <div class=" flex items-center  p-2">
+            <div class=" flex items-center  p-2 hover:bg-gray-100 rounded-lg">
                 <img src="../assets/images/html.png" alt="" class="w-4 mr-2">
                 <p class="font-medium text-gray-700 text-lg flex-1">Development Team</p>
                 <div>
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="border border-t-0 rounded-b-lg flex p-2 items-center  hover:cursor-pointer mb-4">
+        <div class="border border-t-0 rounded-b-lg flex p-2 items-center  hover:cursor-pointer mb-4 hover:bg-gray-100 ">
             <img src="../assets/images/more.png" alt="" class="ml-2 w-4 mr-4">
             <p class="font-medium text-gray-400 text-lg flex-1"> Create A Team </p>
 
@@ -66,15 +66,15 @@
         </PanelMenu>
 
 
-        <div class=" flex items-center mb-2 p-2 ">
+        <div class=" flex items-center mb-2 p-2 hover:bg-gray-100 ">
             <img src="../assets/images/add-friend.png" alt="" class="w-4 mr-2">
             <p class="font-bold text-gray-700 text-lg flex-1"> Invite Teammates </p>
         </div>
-        <div class=" flex items-center mb-2 p-2 hover:cursor-pointer">
+        <div class=" flex items-center mb-2 p-2 hover:cursor-pointer hover:bg-gray-100">
             <img src="../assets/images/question.png" alt="" class="w-4 mr-2">
             <p class="font-bold text-gray-700 text-lg flex-1"> Help and first steps</p>
         </div>
-        <div class=" flex items-center mb-2 p-2 bg-gray-100 rounded-lg hover:cursor-pointer">
+        <div class=" flex items-center mb-2 p-2 bg-gray-100 rounded-lg hover:cursor-pointer hover:bg-gray-100">
             <img src="../assets/images/number-7.png" alt="" class="w-5 mr-2">
             <p class="font-bold text-gray-700 text-lg flex-1"> days left on trial</p>
             <p class="bg-black text-white font-bold p-2 rounded-lg">Add billing</p>
