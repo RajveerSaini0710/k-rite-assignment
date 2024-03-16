@@ -16,12 +16,13 @@
 
         <!-- section 2 -->
         <div class="flex items-center border-b">
+            <Toast position="bottom-right" group="br" />
             <Menubar :model="items1" class="flex-1" />
-            <div class=" flex items-center p-2 border rounded-lg mr-2 hover:cursor-pointer">
+            <div class=" flex items-center p-2 border rounded-lg mr-2 hover:cursor-pointer" @click="meetingButton">
                 <i class="pi pi-plus-circle mr-2"></i>
                 <p class="font-medium text-gray-700 text-sm  flex-1">Meeting</p>
             </div>
-            <div class=" flex items-center p-2 border rounded-lg mr-4 hover:cursor-pointer">
+            <div class=" flex items-center p-2 border rounded-lg mr-4 hover:cursor-pointer" @click="importButton">
                 <i class="pi pi-download mr-2"></i>
                 <p class="font-medium text-gray-700 text-sm  flex-1">Import / Export</p>
             </div>
@@ -147,8 +148,14 @@ export default {
         archiveProduct() {
             this.$toast.add({ severity: 'success', summary: 'Archive Product', group: 'br', detail: 'Products are archived', life: 3000 });
         },
+        meetingButton() {
+            this.$toast.add({ severity: 'success', summary: 'Meeting Button', group: 'br', detail: 'Meeting will open ', life: 3000 });
+        },
+        importButton() {
+            this.$toast.add({ severity: 'success', summary: 'Import Button', group: 'br', detail: 'Import Export will open ', life: 3000 });
+        },
         deleteProduct() {
-            this.$toast.add({ severity: 'danger', summary: 'Delete Product', group: 'br', detail: 'Products are Deleted', life: 3000 });
+            this.$toast.add({ severity: 'error', summary: 'Delete Product', group: 'br', detail: 'Products are Deleted', life: 3000 });
         },
         moreProduct() {
             this.$toast.add({ severity: 'info', summary: 'More Product', group: 'br', detail: 'More are archived', life: 3000 });
