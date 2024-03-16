@@ -96,7 +96,7 @@ export default {
         return {
             items: [
                 {
-                    label: 'Mail',
+                    label: 'Products',
                     icon: 'pi pi-file',
                     badge: 5,
                     items: [
@@ -123,7 +123,7 @@ export default {
                     ]
                 },
                 {
-                    label: 'Reports',
+                    label: 'Sales',
                     icon: 'pi pi-file',
                     shortcut: '⌘+R',
                     items: [
@@ -140,7 +140,7 @@ export default {
                     ]
                 },
                 {
-                    label: 'Profile',
+                    label: 'Design',
                     icon: 'pi pi-file',
                     shortcut: '⌘+W',
                     items: [
@@ -155,7 +155,39 @@ export default {
                             shortcut: '⌘+P'
                         }
                     ]
-                }
+                },
+                {
+                    label: "Office",
+                    icon: 'pi pi-file',
+                    items: [
+                        {
+                            label: 'Settings',
+                            icon: 'pi pi-cog',
+                            shortcut: '⌘+O'
+                        },
+                        {
+                            label: 'Privacy',
+                            icon: 'pi pi-shield',
+                            shortcut: '⌘+P'
+                        }
+                    ]
+                },
+                {
+                    label: "Legal",
+                    icon: 'pi pi-file',
+                    items: [
+                        {
+                            label: 'Settings',
+                            icon: 'pi pi-cog',
+                            shortcut: '⌘+O'
+                        },
+                        {
+                            label: 'Privacy',
+                            icon: 'pi pi-shield',
+                            shortcut: '⌘+P'
+                        }
+                    ]
+                },
             ]
         };
     }
