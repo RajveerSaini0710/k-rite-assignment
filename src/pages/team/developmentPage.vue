@@ -1,8 +1,9 @@
 <template>
-    <section>
-        <h1>
-            Marketing Page
+    <section class="w-full h-lvh flex flex-col justify-center items-center">
+        <h1 class="text-4xl font-bold text-gray-700 mb-4">
+            Development Page
         </h1>
-        <p>Go Back To Product Page</p>
+        <router-link to="/products" class="text-blue-400 text-lg font-bold hover:cursor-pointer">Go Back To Product
+            Page</router-link>
     </section>
 </template>
