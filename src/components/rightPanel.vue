@@ -10,7 +10,7 @@
                 </IconField>
                 <label for="search" class="text-gray-400 indent-6 ">Search for...</label>
             </FloatLabel>
-            <i class="pi pi-clone text-lg flex items-center border py-1 px-2 rounded-lg mr-2"></i>
+            <i class="pi pi-clone text-lg flex items-center border py-2 px-2 rounded-lg mr-2"></i>
             <i class="pi pi-cog text-lg flex items-center border py-2 px-2 rounded-lg mr-2"></i>
         </div>
 
