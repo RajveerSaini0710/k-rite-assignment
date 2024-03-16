@@ -1,9 +1,9 @@
 <template>
-    <section class="  w-[75%] border rounded-lg my-4 mx-2 ">
+    <section class=" md:w-[75%] border rounded-lg my-4 mx-2 ">
         <!-- section 1  -->
-        <div class="flex justify-center  border-b px-4 pt-6 pb-3">
-            <h1 class="text-xl font-bold text-gray-700 flex-1">Products</h1>
-            <FloatLabel class="mr-4">
+        <div class="md:flex justify-center  border-b px-4 pt-6 pb-3 " v-if="screenWidth > 500">
+            <h1 class="text-xl font-bold text-gray-700 flex-1 mb-2 ">Products</h1>
+            <FloatLabel class="md:mr-4">
                 <IconField iconPosition="left">
                     <InputIcon class="pi pi-search"> </InputIcon>
                     <InputText v-model="filters['global'].value" id="search" @input="updateGlobalFilter" />
@@ -12,6 +12,22 @@
             </FloatLabel>
             <i class="pi pi-clone text-lg flex items-center border py-1 px-2 rounded-lg mr-2"></i>
             <i class="pi pi-cog text-lg flex items-center border py-2 px-2 rounded-lg mr-2"></i>
+        </div>
+
+        <div class="md:flex justify-center  border-b px-4 pt-6 pb-3 " v-else>
+            <div class="flex justify-center mb-2">
+                <h1 class="text-xl font-bold text-gray-700 flex-1  ">Products</h1>
+                <i class="pi pi-clone text-lg flex items-center border py-2 px-2 rounded-lg mr-2"></i>
+                <i class="pi pi-cog text-lg flex items-center border py-2 px-2 rounded-lg mr-2"></i>
+            </div>
+            <FloatLabel class="md:mr-4">
+                <IconField iconPosition="left">
+                    <InputIcon class="pi pi-search"> </InputIcon>
+                    <InputText v-model="filters['global'].value" id="search" @input="updateGlobalFilter" />
+                </IconField>
+                <label for="search" class="text-gray-400 indent-6 ">Search for...</label>
+            </FloatLabel>
+
         </div>
 
         <!-- section 2 -->
@@ -41,8 +57,8 @@
             <Column field="brands.name" header="Brands" sortable class="w-56">
                 <template #body="{ data }">
                     <div class="flex gap-2 items-center">
-                        <img :src="data.brands.img" alt="img" width="20px">
-                        <p class="font-medium text-lg text-gray-700">{{ data.brands.name }} </p>
+                        <img :src="data.brands.img" alt="img" class="md:w-5 w-3">
+                        <p class="font-medium md:text-lg text-gray-700 text-xs">{{ data.brands.name }} </p>
                     </div>
                 </template>
             </Column>
@@ -59,7 +75,7 @@
             <Column field="categories" sortable header="Categories">
                 <template #body="{ data }">
                     <Tag v-for="category in data.categories" :value="category.name" :severity="category.severity"
-                        class="mr-1"></Tag>
+                        class="mr-1 mb-2  md:mb-0"></Tag>
                 </template>
             </Column>
             <Column field="tags" sortable header="Tags">
@@ -69,31 +85,38 @@
             </Column>
             <Column field="nextMeeting" header="Next Meeting">
                 <template #body="{ data }">
-                    <Tag :value="data.nextMeeting.name" :severity="data.nextMeeting.severity" class="mr-1"></Tag>
+                    <Tag :value="data.nextMeeting.name" :severity="data.nextMeeting.severity"
+                        class="mr-1 text-xs md:text-sm">
+                    </Tag>
                 </template>
             </Column>
         </DataTable>
 
         <!-- section 4  -->
-        <div class="flex justify-center mt-20" v-if="this.selectedBrands.length">
-            <div class="border flex p-2 rounded-lg items-center ">
-                <span class="bg-black text-white px-2 rounded-lg mr-1">{{ selectedBrands.length }} </span>
-                <span class="mr-4"> Selected</span>
-                <div class=" flex items-center p-2 border rounded-lg mr-2 hover:cursor-pointer" label="Bottom Right"
-                    @click="archiveProduct">
+        <div class="flex justify-center  mt-20 mb-6  w-full " v-if="this.selectedBrands.length">
+            <div class="border flex justify-center  px-4 py-2 rounded-lg items-center ">
+                <span class="bg-black text-white px-2 rounded-lg mr-1 text-xs md:text-base">{{
+            selectedBrands.length
+        }}
+                </span>
+                <span class="mr-4 text-xs md:text-base"> Selected</span>
+                <div class=" flex items-center p-2 border rounded-lg mr-2 hover:cursor-pointer text-xs md:text-base"
+                    label="Bottom Right" @click="archiveProduct">
                     <Toast position="bottom-right" group="br" />
-                    <i class="pi pi-box mr-2"></i>
-                    <p class="font-medium text-gray-700 text-sm  flex-1">Archive</p>
+                    <i class="pi pi-box md:mr-2 text-xs md:text-base"></i>
+                    <p class="font-medium text-gray-700  text-xs md:text-base  flex-1" v-if="screenWidth > 500">Archive
+                    </p>
                 </div>
                 <div class=" flex items-center p-2 border rounded-lg mr-2 hover:cursor-pointer" @click="deleteProduct">
-                    <i class="pi pi-trash mr-2 text-red-500"></i>
-                    <p class="font-medium  text-sm  flex-1 text-red-500">Delete</p>
+                    <i class="pi pi-trash md:mr-2 text-red-500"></i>
+                    <p class="font-medium  text-xs md:text-base  flex-1 text-red-500 " v-if="screenWidth > 500">Delete
+                    </p>
                 </div>
                 <div class=" flex items-center p-2 border rounded-lg mr-4 hover:cursor-pointer " @click="moreProduct">
-                    <i class="pi pi-plus-circle mr-2"></i>
-                    <p class="font-medium text-gray-700 text-sm  flex-1">More</p>
+                    <i class="pi pi-plus-circle md:mr-2"></i>
+                    <p class="font-medium text-gray-700 text-xs md:text-base flex-1" v-if="screenWidth > 500">More</p>
                 </div>
-                <i class="pi pi-times hover:cursor-pointer" @click="cancelProductSelect"></i>
+                <i class="pi pi-times text-xs md:text-base hover:cursor-pointer" @click="cancelProductSelect"></i>
             </div>
         </div>
     </section>
@@ -131,53 +154,11 @@ export default {
     created() {
         this.initFilters();
     },
-    methods: {
-        initFilters() {
-            this.filters = {
-                global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-                brands: { value: null, matchMode: FilterMatchMode.IN },
-                tags: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
-                categories: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
-            };
-        },
-        updateGlobalFilter() {
-            this.$nextTick(() => {
-                this.$refs.dt.filter(this.filters['global'].value, 'brands.name', 'contains');
-            });
-        },
-        archiveProduct() {
-            this.$toast.add({ severity: 'success', summary: 'Archive Product', group: 'br', detail: 'Products are archived', life: 3000 });
-        },
-        meetingButton() {
-            this.$toast.add({ severity: 'success', summary: 'Meeting Button', group: 'br', detail: 'Meeting will open ', life: 3000 });
-        },
-        importButton() {
-            this.$toast.add({ severity: 'success', summary: 'Import Button', group: 'br', detail: 'Import Export will open ', life: 3000 });
-        },
-        deleteProduct() {
-            this.$toast.add({ severity: 'error', summary: 'Delete Product', group: 'br', detail: 'Products are Deleted', life: 3000 });
-        },
-        moreProduct() {
-            this.$toast.add({ severity: 'info', summary: 'More Product', group: 'br', detail: 'More are archived', life: 3000 });
-        },
-        cancelProductSelect() {
-            this.products.forEach(product => {
-                product.selected = false;
-            });
-        }
-    },
-    watch: {
-        // Watch for changes to the products array
-        products: {
-            handler(newProducts) {
-                // Update selectedBrands with selected products
-                this.selectedBrands = newProducts.filter(product => product.selected);
-            },
-            deep: true // Watch for nested changes within the products array
-        }
-    },
+
+
     data() {
         return {
+            screenWidth: 0,
             selectedBrands: [],
             filters: null,
             products: [
@@ -276,6 +257,62 @@ export default {
 
 
         }
-    }
+    },
+    watch: {
+        // Watch for changes to the products array
+        products: {
+            handler(newProducts) {
+                // Update selectedBrands with selected products
+                this.selectedBrands = newProducts.filter(product => product.selected);
+            },
+            deep: true // Watch for nested changes within the products array
+        }
+    },
+
+    methods: {
+        initFilters() {
+            this.filters = {
+                global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+                brands: { value: null, matchMode: FilterMatchMode.IN },
+                tags: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+                categories: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+            };
+        },
+        updateGlobalFilter() {
+            this.$nextTick(() => {
+                this.$refs.dt.filter(this.filters['global'].value, 'brands.name', 'contains');
+            });
+        },
+        archiveProduct() {
+            this.$toast.add({ severity: 'success', summary: 'Archive Product', group: 'br', detail: 'Products are archived', life: 3000 });
+        },
+        meetingButton() {
+            this.$toast.add({ severity: 'success', summary: 'Meeting Button', group: 'br', detail: 'Meeting will open ', life: 3000 });
+        },
+        importButton() {
+            this.$toast.add({ severity: 'success', summary: 'Import Button', group: 'br', detail: 'Import Export will open ', life: 3000 });
+        },
+        deleteProduct() {
+            this.$toast.add({ severity: 'error', summary: 'Delete Product', group: 'br', detail: 'Products are Deleted', life: 3000 });
+        },
+        moreProduct() {
+            this.$toast.add({ severity: 'info', summary: 'More Product', group: 'br', detail: 'More are archived', life: 3000 });
+        },
+        cancelProductSelect() {
+            this.products.forEach(product => {
+                product.selected = false;
+            });
+        },
+        updateScreenSize() {
+            this.screenWidth = window.innerWidth
+        },
+    },
+    mounted() {
+        this.updateScreenSize()
+        window.addEventListener('resize', this.updateScreenSize)
+    },
+    beforeUnmount() {
+        window.removeEventListener('resize', this.updateScreenSize)
+    },
 }
 </script>
