@@ -1,5 +1,5 @@
 <template>
-    <section class="h-full w-[75%] border rounded-lg my-4 mx-2 ">
+    <section class="  w-[75%] border rounded-lg my-4 mx-2 ">
         <!-- section 1  -->
         <div class="flex justify-center  border-b px-4 pt-6 pb-3">
             <h1 class="text-xl font-bold text-gray-700 flex-1">Products</h1>
@@ -67,6 +67,27 @@
                 </template>
             </Column>
         </DataTable>
+
+        <!-- section 4  -->
+        <div class="flex justify-center mt-20">
+            <div class="border flex p-2 rounded-lg items-center ">
+                <span class="bg-black text-white px-2 rounded-lg mr-1">{{ 3 }} </span>
+                <span class="mr-4"> Selected</span>
+                <div class=" flex items-center p-2 border rounded-lg mr-2 hover:cursor-pointer">
+                    <i class="pi pi-box mr-2"></i>
+                    <p class="font-medium text-gray-700 text-sm  flex-1">Archive</p>
+                </div>
+                <div class=" flex items-center p-2 border rounded-lg mr-2 hover:cursor-pointer">
+                    <i class="pi pi-trash mr-2 text-red-500"></i>
+                    <p class="font-medium  text-sm  flex-1 text-red-500">Delete</p>
+                </div>
+                <div class=" flex items-center p-2 border rounded-lg mr-4 hover:cursor-pointer ">
+                    <i class="pi pi-plus-circle mr-2"></i>
+                    <p class="font-medium text-gray-700 text-sm  flex-1">More</p>
+                </div>
+                <i class="pi pi-times hover:cursor-pointer"></i>
+            </div>
+        </div>
     </section>
 </template>
 
